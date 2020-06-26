@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrapper/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import ReactPlayer from 'react-player';
-import { sendMessage, onMessage, removeAllListeners } from './service';
+import { sendMessage, onMessage, removeAllListeners, isUrlValid } from './service';
 import logger from '/imports/startup/client/logger';
 
 import ArcPlayer from './custom-players/arc-player';
-
-import { isUrlValid } from '../service';
 
 import { styles } from './styles';
 
