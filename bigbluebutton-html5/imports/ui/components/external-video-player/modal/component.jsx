@@ -76,7 +76,7 @@ class ExternalVideoModal extends Component {
     const { intl } = this.props;
     const { url } = this.state;
 
-    const valid = (!url || url.length <= 3) || isUrlValid(url);
+    const valid = (!url || url.length <= 3);
 
     return (
       !valid
@@ -93,7 +93,8 @@ class ExternalVideoModal extends Component {
     const { intl, closeModal } = this.props;
     const { url, sharing } = this.state;
 
-    const startDisabled = !isUrlValid(url);
+    //const startDisabled = !isUrlValid(url);
+    const startDisabled = false;
 
     return (
       <Modal

@@ -7,6 +7,8 @@ import logger from '/imports/startup/client/logger';
 
 import ArcPlayer from './custom-players/arc-player';
 
+import { isUrlValid } from '../service';
+
 import { styles } from './styles';
 
 const intlMessages = defineMessages({
@@ -412,6 +414,8 @@ class VideoPlayer extends Component {
       playing, playbackRate, mutedByEchoTest, autoPlayBlocked,
     } = this.state;
 
+    const isVideo = isUrlValid(videoUrl);
+
     return (
       <div
         id="video-player"
@@ -426,18 +430,28 @@ class VideoPlayer extends Component {
           )
           : ''
         }
-        <ReactPlayer
-          className={styles.videoPlayer}
-          url={videoUrl}
-          config={this.opts}
-          muted={mutedByEchoTest}
-          playing={playing}
-          playbackRate={playbackRate}
-          onReady={this.handleOnReady}
-          onPlay={this.handleOnPlay}
-          onPause={this.handleOnPause}
-          ref={(ref) => { this.player = ref; }}
-        />
+        {isVideo
+          ? (
+            <ReactPlayer
+              className={styles.videoPlayer}
+              url={videoUrl}
+              config={this.opts}
+              muted={mutedByEchoTest}
+              playing={playing}
+              playbackRate={playbackRate}
+              onReady={this.handleOnReady}
+              onPlay={this.handleOnPlay}
+              onPause={this.handleOnPause}
+              ref={(ref) => { this.player = ref; }}
+            />
+          ) : (
+            <div className={styles.videoPlayer}>
+              <iframe src={videoUrl} />
+            </div>
+          )
+
+        }
+        
       </div>
     );
   }
