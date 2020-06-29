@@ -88,7 +88,7 @@ class ExternalVideoModal extends Component {
     return (
       isNotValid
         ? (
-          <div className={styles.urlError} key={`isUrlValid_${isValid}`}>
+          <div className={styles.urlError} key={`isUrlValid_${isNotValid}`}>
             {intl.formatMessage(intlMessages.urlError)}
           </div>
         )
