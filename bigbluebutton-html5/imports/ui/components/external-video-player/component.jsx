@@ -413,7 +413,7 @@ class VideoPlayer extends Component {
     } = this.state;
 
     const isVideo = isUrlValid(videoUrl);
-    const isIframeClass = isVideo ? "" : "websiteIframeWrapper";
+    const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
 
     return (
       <div
