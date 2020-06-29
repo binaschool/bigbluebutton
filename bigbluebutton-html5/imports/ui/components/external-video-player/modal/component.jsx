@@ -48,6 +48,7 @@ class ExternalVideoModal extends Component {
     this.state = {
       url: videoUrl,
       sharing: videoUrl,
+      textEntered : false
     };
 
     this.startWatchingHandler = this.startWatchingHandler.bind(this);
@@ -69,12 +70,12 @@ class ExternalVideoModal extends Component {
   }
 
   updateVideoUrlHandler(ev) {
-    this.setState({ url: ev.target.value });
+    this.setState({ url: ev.target.value, textEntered : true });
   }
 
   renderUrlError() {
     const { intl } = this.props;
-    const { url } = this.state;
+    const { url, textEntered } = this.state;
 
     var isValidURL = new RegExp('^(https?:\\/\\/)?'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -83,7 +84,10 @@ class ExternalVideoModal extends Component {
     '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 
-    const isNotValid = (!url || url.length <= 3 || !isValidURL.test(url));
+    let isNotValid = false;
+    if(textEntered) {
+      isNotValid = (!url || url.length <= 3 || !isValidURL.test(url));
+    }
 
     return (
       isNotValid
