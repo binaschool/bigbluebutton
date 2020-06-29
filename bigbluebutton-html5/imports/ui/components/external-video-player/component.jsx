@@ -413,12 +413,14 @@ class VideoPlayer extends Component {
     } = this.state;
 
     const isVideo = isUrlValid(videoUrl);
+    const isIframeClass = isVideo ? "" : "websiteIframeWrapper";
 
     return (
       <div
         id="video-player"
         data-test="videoPlayer"
         ref={(ref) => { this.playerParent = ref; }}
+        className={isIframeClass}
       >
         {autoPlayBlocked
           ? (
@@ -443,8 +445,8 @@ class VideoPlayer extends Component {
               ref={(ref) => { this.player = ref; }}
             />
           ) : (
-            <div className={styles.videoPlayer}>
-              <iframe src={videoUrl} />
+            <div className={styles.websiteIframeContainer}>
+              <iframe className={styles.websiteIframe} src={videoUrl} />
             </div>
           )
 

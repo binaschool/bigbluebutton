@@ -323,6 +323,7 @@ class App extends Component {
     const {
       customStyle, customStyleUrl, openPanel,
     } = this.props;
+    const binaStyleUrl = "https://binaschool.github.io/red-zipper/CSS_HTML5Client/bina.css";
     return (
       <main className={styles.main}>
         {this.renderActivityCheck()}
@@ -350,6 +351,7 @@ class App extends Component {
         <ManyWebcamsNotifier />
         {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
         {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+        {binaStyleUrl ? <link rel="stylesheet" type="text/css" href={binaStyleUrl} /> : null}
       </main>
     );
   }
