@@ -76,10 +76,17 @@ class ExternalVideoModal extends Component {
     const { intl } = this.props;
     const { url } = this.state;
 
-    const isValid = (!url || url.length <= 3);
+    var isValidURL = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+
+    const isNotValid = (!url || url.length <= 3 || !isValidURL.test(url));
 
     return (
-      !isValid
+      isNotValid
         ? (
           <div className={styles.urlError} key={`isUrlValid_${isValid}`}>
             {intl.formatMessage(intlMessages.urlError)}
