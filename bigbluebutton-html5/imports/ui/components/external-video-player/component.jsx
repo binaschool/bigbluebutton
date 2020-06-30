@@ -379,7 +379,7 @@ class VideoPlayer extends Component {
   }
 
   handleOnPlay() {
-    const { isPresenter } = this.props;
+    const { isPresenter, videoUrl } = this.props;
     const { playing } = this.state;
 
     const curTime = this.getCurrentTime();
@@ -388,6 +388,11 @@ class VideoPlayer extends Component {
       this.sendSyncMessage('play', { time: curTime });
     }
     this.setState({ playing: true });
+
+    const isVideo = isUrlValid(videoUrl);
+    if(!isVideo) {
+      window.open(videoUrl,'_blank');
+    }
 
     this.handleFirstPlay();
   }
@@ -446,7 +451,8 @@ class VideoPlayer extends Component {
             />
           ) : (
             <div className={styles.websiteIframeContainer}>
-              <iframe className={styles.websiteIframe} src={videoUrl} />
+              {/* <iframe className={styles.websiteIframe} src={videoUrl} /> */}
+              <p>You are now being redirected to an external site. If the site does not open, please <a href={videoUrl} target="_blank">click here.</a></p>
             </div>
           )
 
