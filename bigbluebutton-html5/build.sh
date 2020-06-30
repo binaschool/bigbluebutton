@@ -3,6 +3,9 @@
 # Please set the following environment variables before running the script
 # BBB_SERVER="staging.example.com"
 
+set -x
+set -euo pipefail
+
 BBB_URL=wss://${BBB_SERVER}/bbb-webrtc-sfu
 
 CONTAINER_IMAGE=bbb-html5
@@ -28,7 +31,7 @@ scp source.tar.gz root@${BBB_SERVER}:/root/source.tar.gz
 
 echo "Stop existing bbb-html5 service, untar archive and start the service again"
 
-ssh root@${STAGING_SERVER} << EOF 
+ssh root@${BBB_SERVER} << EOF 
   systemctl stop bbb-html5
   tar -xvzf /root/source.tar.gz -C /usr/share/meteor
   systemctl start bbb-html5
