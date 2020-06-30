@@ -127,7 +127,7 @@ public:
     enableVideoStats: false
     enableVideoMenu: true
     enableListenOnly: true
-    autoShareWebcam: false
+    autoShareWebcam: true
     skipVideoPreview: false
   pingPong:
     clearUsersInSeconds: 180
