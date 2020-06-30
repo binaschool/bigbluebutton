@@ -4,7 +4,7 @@ public:
     desktopFontSize: 14px
     audioChatNotification: false
     autoJoin: true
-    listenOnlyMode: true
+    listenOnlyMode: false
     forceListenOnly: false
     skipCheck: true
     clientTitle: BigBlueButton
