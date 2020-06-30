@@ -1,0 +1,37 @@
+FROM node:8.8-slim as meteor-base
+
+RUN useradd -m -G users -s /bin/bash meteor 
+
+USER meteor
+
+RUN set -x \
+&& curl -sL https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh
+
+FROM node:8-jessie-slim
+
+ARG bbb_url
+
+COPY . /source
+
+RUN set -x \
+ && apt-get update \
+ && apt-get install -y python build-essential \
+ && useradd -m -G users -s /bin/bash meteor \
+ && chown -R meteor:meteor /source
+
+USER meteor
+
+RUN export BBBHOST=${bbb_url} \
+ && sed -i "s|HOST|$BBBHOST|1" /source/private/config/settings.yml \
+ && cat /source/private/config/settings.yml | grep wsUrl
+
+COPY --from=meteor-base /home/meteor/.meteor /home/meteor/.meteor
+
+WORKDIR /source
+
+RUN set -x \
+  && /home/meteor/.meteor/packages/meteor-tool/1.10.2/mt-os.linux.x86_64/scripts/admin/launch-meteor update --allow-superuser --release 1.8 \
+  && /home/meteor/.meteor/packages/meteor-tool/1.10.2/mt-os.linux.x86_64/scripts/admin/launch-meteor npm install \
+  && /home/meteor/.meteor/packages/meteor-tool/1.10.2/mt-os.linux.x86_64/scripts/admin/launch-meteor build --server-only /home/meteor/meteorbundle
+
+ENTRYPOINT [ "/bin/bash" ]
