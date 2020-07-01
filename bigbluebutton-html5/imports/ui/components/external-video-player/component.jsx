@@ -390,7 +390,9 @@ class VideoPlayer extends Component {
     this.setState({ playing: true });
 
     const isVideo = isUrlValid(videoUrl);
+    console.log('opening external window', isVideo);
     if(!isVideo) {
+      console.log('opening external window if');
       window.open(videoUrl,'_blank');
     }
 
