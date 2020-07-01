@@ -423,11 +423,12 @@ class VideoPlayer extends Component {
 
     const isVideo = isUrlValid(videoUrl);
     const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
-    const openInExternalWindowString = "#[=]openInExternalWindow";
-    const openInExternalWindow = (videoUrl.indexOf(openInExternalWindowString) !== -1);
     let externalWebsite = null;
 
     if(videoUrl !== "") {
+      const openInExternalWindowString = "#[=]openInExternalWindow";
+      const openInExternalWindow = (videoUrl.indexOf(openInExternalWindowString) !== -1);
+      
       if(!isVideo && openInExternalWindow) {
         const realVideoUrl = videoUrl.replace("#[=]openInExternalWindow", "");
         externalWebsite = (
