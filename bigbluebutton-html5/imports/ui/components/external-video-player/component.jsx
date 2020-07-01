@@ -109,7 +109,6 @@ class VideoPlayer extends Component {
       const openInExternalWindow = "#[=]openInExternalWindow";
       if(!isVideo && videoUrl.indexOf(openInExternalWindow) !== -1) {
         const realVideoURL = videoUrl.replace("#[=]openInExternalWindow", "");
-        console.log(realVideoURL, videoUrl);
         window.open(realVideoURL,'_blank');
       }
     }

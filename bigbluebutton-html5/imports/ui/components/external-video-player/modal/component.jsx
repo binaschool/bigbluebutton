@@ -68,7 +68,7 @@ class ExternalVideoModal extends Component {
 
     let finalURL = url.trim();
     if(this.state.openInExternalWindow) {
-      finalURL = finalURL="#[=]openInExternalWindow";
+      finalURL = finalURL + "#[=]openInExternalWindow";
     }
 
     startWatching(finalURL);
