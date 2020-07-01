@@ -48,13 +48,15 @@ class ExternalVideoModal extends Component {
     this.state = {
       url: videoUrl,
       sharing: videoUrl,
-      textEntered : false
+      textEntered : false,
+      openInExternalWindow : false
     };
 
     this.startWatchingHandler = this.startWatchingHandler.bind(this);
     this.updateVideoUrlHandler = this.updateVideoUrlHandler.bind(this);
     this.renderUrlError = this.renderUrlError.bind(this);
     this.updateVideoUrlHandler = this.updateVideoUrlHandler.bind(this);
+    this.updateVideoExternalWindow = this.updateVideoExternalWindow.bind(this);
   }
 
   startWatchingHandler() {
@@ -63,14 +65,26 @@ class ExternalVideoModal extends Component {
       closeModal,
     } = this.props;
 
-    const { url } = this.state;
+    if(this.props.openInExternalWindow) {
 
-    startWatching(url.trim());
+    }
+
+    const { url } = this.state;
+    let finalURL = url.trim();
+    if(this.props.openInExternalWindow) {
+      finalURL = finalURL="#[=]openInExternalWindow";
+    }
+
+    startWatching(finalURL);
     closeModal();
   }
 
   updateVideoUrlHandler(ev) {
     this.setState({ url: ev.target.value, textEntered : true });
+  }
+
+  updateVideoExternalWindow(ev) {
+    this.setState({ openInExternalWindow: !this.state.openInExternalWindow });
   }
 
   renderUrlError() {
@@ -129,6 +143,17 @@ class ExternalVideoModal extends Component {
                 name="video-modal-input"
                 placeholder={intl.formatMessage(intlMessages.urlInput)}
                 disabled={sharing}
+                aria-describedby="exernal-video-note"
+              />
+            </label>
+            <label htmlFor="video-modal-input" id="video-modal-input">
+              {intl.formatMessage("Open in external window")}
+              <check
+                type="checkbox"
+                id="video-modal-input-externalWindow"
+                onChange={this.updateVideoExternalWindow}
+                name="video-modal-input-externalWindow"
+                defaultChecked={false}
                 aria-describedby="exernal-video-note"
               />
             </label>

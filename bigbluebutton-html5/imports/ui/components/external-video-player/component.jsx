@@ -103,14 +103,13 @@ class VideoPlayer extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.resizeListener);
     window.addEventListener('beforeunload', this.onBeforeUnload);
-
-    console.log("component did mount", this.props.videoUrl);
-    if(this.props.videoUrl !== "") {
-      const isVideo = isUrlValid(this.props.videoUrl);
-      console.log('opening external window', isVideo);
-      if(!isVideo) {
-        console.log('opening external window if');
-        window.open(this.props.videoUrl,'_blank');
+    const { videoUrl } = this.props;
+    if(videoUrl !== "") {
+      const isVideo = isUrlValid(videoUrl);
+      const openInExternalWindow = "#[=]openInExternalWindow";
+      if(!isVideo && videoUrl.indexOf(openInExternalWindow) !== -1) {
+        const realVideoURL = videoUrl.replace("#[=]openInExternalWindow", "");
+        window.open(realVideoURL,'_blank');
       }
     }
 
@@ -421,9 +420,30 @@ class VideoPlayer extends Component {
     const {
       playing, playbackRate, mutedByEchoTest, autoPlayBlocked,
     } = this.state;
-    console.log("does console work?", videoUrl);
+
     const isVideo = isUrlValid(videoUrl);
     const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
+    let realVideoURL = videoURL;
+    let openInExternalWindow = (videoUrl.indexOf(openInExternalWindow) !== -1);
+    let externalWebsite = null;
+
+    if(videoUrl !== "") {
+      const openInExternalWindow = "#[=]openInExternalWindow";
+      if(!isVideo && openInExternalWindow) {
+        realVideoURL = videoUrl.replace("#[=]openInExternalWindow", "");
+        externalWebsite = (
+          <div className={styles.websiteIframeContainer}>
+            <p>You are now being redirected to an external site. If the site does not open, please <a href={realVideoURL} target="_blank">click here.</a></p>
+          </div>
+        );
+      } else if (!isVideo && !openInExternalWindow) {
+        externalWebsite = (
+          <div className={styles.websiteIframeContainer}>
+            <iframe className={styles.websiteIframe} src={videoUrl} />
+          </div>
+        );
+      }
+    }
 
     return (
       <div
@@ -454,14 +474,10 @@ class VideoPlayer extends Component {
               onPause={this.handleOnPause}
               ref={(ref) => { this.player = ref; }}
             />
-          ) : (
-            <div className={styles.websiteIframeContainer}>
-              {/* <iframe className={styles.websiteIframe} src={videoUrl} /> */}
-              <p>You are now being redirected to an external site. If the site does not open, please <a href={videoUrl} target="_blank">click here.</a></p>
-            </div>
-          )
+          ) : (null)
 
         }
+        {externalWebsite}
         
       </div>
     );
