@@ -104,6 +104,16 @@ class VideoPlayer extends Component {
     window.addEventListener('resize', this.resizeListener);
     window.addEventListener('beforeunload', this.onBeforeUnload);
 
+    console.log("component did mount", this.props.videoUrl);
+    if(this.props.videoUrl !== "") {
+      const isVideo = isUrlValid(this.props.videoUrl);
+      console.log('opening external window', isVideo);
+      if(!isVideo) {
+        console.log('opening external window if');
+        window.open(this.props.videoUrl,'_blank');
+      }
+    }
+
     clearInterval(this.syncInterval);
     clearTimeout(this.autoPlayTimeout);
 
@@ -141,22 +151,12 @@ class VideoPlayer extends Component {
 
       this.registerVideoListeners();
     }
-    console.log("component did update", this.props.videoUrl, prevProps.videoUrl);
-    if(this.props.videoUrl !== prevProps.videoUrl && this.props.videoUrl !== "") {
-      const isVideo = isUrlValid(this.props.videoUrl);
-      console.log('opening external window', isVideo);
-      if(!isVideo) {
-        console.log('opening external window if');
-        window.open(this.props.videoUrl,'_blank');
-      }
-    }
     
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     const { isPresenter, videoUrl } = this.props;
     const { playing } = this.state;
-    console.log('should component update', videoUrl);
     // If user is presenter we don't re-render playing state changes
     // Because he's in control of the play/pause status
     if (nextProps.isPresenter && isPresenter && nextState.playing !== playing) {
