@@ -67,7 +67,7 @@ class ExternalVideoModal extends Component {
     const { url } = this.state;
 
     let finalURL = url.trim();
-    if(this.props.openInExternalWindow) {
+    if(this.state.openInExternalWindow) {
       finalURL = finalURL="#[=]openInExternalWindow";
     }
 
