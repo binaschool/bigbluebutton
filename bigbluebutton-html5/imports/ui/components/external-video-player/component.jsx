@@ -154,9 +154,9 @@ class VideoPlayer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { isPresenter } = this.props;
+    const { isPresenter, videoUrl } = this.props;
     const { playing } = this.state;
-    console.log('should component update', isVideo);
+    console.log('should component update', videoUrl);
     // If user is presenter we don't re-render playing state changes
     // Because he's in control of the play/pause status
     if (nextProps.isPresenter && isPresenter && nextState.playing !== playing) {
