@@ -107,7 +107,7 @@
     display: block;
   }
 
-  input {
+  input[id="video-modal-input"] {
     @include inputFocus(var(--color-blue-light));
     display: block;
     margin: 10px 0 10px 0;
