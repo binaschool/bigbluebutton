@@ -428,6 +428,7 @@ class VideoPlayer extends Component {
     let externalWebsite = null;
 
     if(videoUrl !== "") {
+      console.log(videoUrl, openInExternalWindow);
       if(!isVideo && openInExternalWindow) {
         const realVideoUrl = videoUrl.replace("#[=]openInExternalWindow", "");
         externalWebsite = (
