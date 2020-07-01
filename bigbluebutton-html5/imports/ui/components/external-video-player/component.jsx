@@ -421,7 +421,7 @@ class VideoPlayer extends Component {
     const {
       playing, playbackRate, mutedByEchoTest, autoPlayBlocked,
     } = this.state;
-
+    console.log("does console work?", videoUrl);
     const isVideo = isUrlValid(videoUrl);
     const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
 
