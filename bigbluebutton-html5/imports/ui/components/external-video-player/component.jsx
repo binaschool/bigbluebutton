@@ -141,6 +141,15 @@ class VideoPlayer extends Component {
 
       this.registerVideoListeners();
     }
+    if(this.props.videoUrl !== prevProps.videoUrl && this.props.videoUrl !== "") {
+      const isVideo = isUrlValid(videoUrl);
+      console.log('opening external window', isVideo);
+      if(!isVideo) {
+        console.log('opening external window if');
+        window.open(videoUrl,'_blank');
+      }
+    }
+    
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -388,13 +397,6 @@ class VideoPlayer extends Component {
       this.sendSyncMessage('play', { time: curTime });
     }
     this.setState({ playing: true });
-
-    const isVideo = isUrlValid(videoUrl);
-    console.log('opening external window', isVideo);
-    if(!isVideo) {
-      console.log('opening external window if');
-      window.open(videoUrl,'_blank');
-    }
 
     this.handleFirstPlay();
   }
