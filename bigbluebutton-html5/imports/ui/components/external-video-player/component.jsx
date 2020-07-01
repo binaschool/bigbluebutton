@@ -141,6 +141,7 @@ class VideoPlayer extends Component {
 
       this.registerVideoListeners();
     }
+    console.log(this.props.videoUrl, prevProps.videoUrl);
     if(this.props.videoUrl !== prevProps.videoUrl && this.props.videoUrl !== "") {
       const isVideo = isUrlValid(videoUrl);
       console.log('opening external window', isVideo);
