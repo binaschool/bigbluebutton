@@ -4,7 +4,6 @@ import Modal from '/imports/ui/components/modal/simple/component';
 import Button from '/imports/ui/components/button/component';
 
 import { defineMessages, injectIntl } from 'react-intl';
-import { isUrlValid } from '../service';
 
 import { styles } from './styles';
 
@@ -65,11 +64,8 @@ class ExternalVideoModal extends Component {
       closeModal,
     } = this.props;
 
-    if(this.props.openInExternalWindow) {
-
-    }
-
     const { url } = this.state;
+
     let finalURL = url.trim();
     if(this.props.openInExternalWindow) {
       finalURL = finalURL="#[=]openInExternalWindow";
@@ -118,7 +114,6 @@ class ExternalVideoModal extends Component {
     const { intl, closeModal } = this.props;
     const { url, sharing } = this.state;
 
-    //const startDisabled = !isUrlValid(url);
     const startDisabled = (!url || url.length <= 3);
 
     return (
@@ -147,7 +142,7 @@ class ExternalVideoModal extends Component {
               />
             </label>
             <label htmlFor="video-modal-input" id="video-modal-input">
-              {intl.formatMessage("Open in external window")}
+              <p>Open in external window :</p>
               <check
                 type="checkbox"
                 id="video-modal-input-externalWindow"
