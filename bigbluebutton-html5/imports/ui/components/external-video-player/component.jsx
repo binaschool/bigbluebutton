@@ -432,7 +432,9 @@ class VideoPlayer extends Component {
         const realVideoUrl = videoUrl.replace("#[=]openInExternalWindow", "");
         externalWebsite = (
           <div className={styles.websiteIframeContainer}>
-            <p>You are now being redirected to an external site. If the site does not open, please <a href={realVideoUrl} target="_blank">click here.</a></p>
+            <div className={styles.websiteIframeLaunchExternal}>
+              <p className={styles.websiteIframeLaunchExternalMessage}>You are now being redirected to an external site. If the site does not open, please <a href={realVideoUrl} target="_blank">click here.</a></p>
+            </div>
           </div>
         );
       } else if (!isVideo && !openInExternalWindow) {

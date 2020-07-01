@@ -145,3 +145,15 @@
   font-style: italic;
   padding-top: var(--sm-padding-y);
 }
+
+.externalWindowLabel {
+  display: inline-block;
+}
+
+.externalWindowCheckbox {
+  margin: 1em;
+  display: inline-block;
+  width: auto;
+}
+
+

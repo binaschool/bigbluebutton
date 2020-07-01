@@ -142,9 +142,10 @@ class ExternalVideoModal extends Component {
               />
             </label>
             <label htmlFor="video-modal-input" id="video-modal-input">
-              <p>Open in external window :</p>
+              <p className={styles.externalWindowLabel}>Open in external window :</p>
               <input
                 type="checkbox"
+                className={styles.externalWindowCheckbox}
                 id="video-modal-input-externalWindow"
                 onChange={this.updateVideoExternalWindow}
                 name="video-modal-input-externalWindow"
