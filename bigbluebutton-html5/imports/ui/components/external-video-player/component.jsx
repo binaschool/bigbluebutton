@@ -104,10 +104,10 @@ class VideoPlayer extends Component {
     window.addEventListener('resize', this.resizeListener);
     window.addEventListener('beforeunload', this.onBeforeUnload);
     const { videoUrl } = this.props;
-    if(videoUrl !== "") {
+    if(videoUrl !== "" && videoUrl !== null) {
       const isVideo = isUrlValid(videoUrl);
       const openInExternalWindow = "#[=]openInExternalWindow";
-      if(!isVideo && videoUrl.indexOf && videoUrl.indexOf(openInExternalWindow) !== -1) {
+      if(!isVideo && videoUrl.indexOf(openInExternalWindow) !== -1) {
         const realVideoURL = videoUrl.replace("#[=]openInExternalWindow", "");
         window.open(realVideoURL,'_blank');
       }
@@ -425,7 +425,7 @@ class VideoPlayer extends Component {
     const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
     let externalWebsite = null;
 
-    if(videoUrl !== "" && videoUrl.indexOf) {
+    if(videoUrl !== "" && videoUrl !== null) {
       const openInExternalWindowString = "#[=]openInExternalWindow";
       const openInExternalWindow = (videoUrl.indexOf(openInExternalWindowString) !== -1);
 
