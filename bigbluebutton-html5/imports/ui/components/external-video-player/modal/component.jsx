@@ -87,7 +87,7 @@ class ExternalVideoModal extends Component {
     const { intl } = this.props;
     const { url, textEntered } = this.state;
 
-    var isValidURL = new RegExp('^(https:\\/\\/)?'+ // protocol
+    var isValidURL = new RegExp('^(https:\\/\\/)'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
@@ -114,7 +114,7 @@ class ExternalVideoModal extends Component {
     const { intl, closeModal } = this.props;
     const { url, sharing } = this.state;
 
-    var isValidURL = new RegExp('^(https:\\/\\/)?'+ // protocol
+    var isValidURL = new RegExp('^(https:\\/\\/)'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
@@ -161,8 +161,7 @@ class ExternalVideoModal extends Component {
               />
             </label>
             <div className={styles.externalVideoNote} id="external-video-note">
-              {intl.formatMessage(intlMessages.note)}
-              Please make sure you use a HTTPS protocol.
+              {(intl.formatMessage(intlMessages.note)+" Please make sure you include a HTTPS protocol.")}
             </div>
           </div>
 
