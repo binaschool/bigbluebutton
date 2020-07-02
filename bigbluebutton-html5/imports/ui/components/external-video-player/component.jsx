@@ -107,7 +107,7 @@ class VideoPlayer extends Component {
     if(videoUrl !== "") {
       const isVideo = isUrlValid(videoUrl);
       const openInExternalWindow = "#[=]openInExternalWindow";
-      if(!isVideo && videoUrl.indexOf(openInExternalWindow) !== -1) {
+      if(!isVideo && videoUrl.indexOf && videoUrl.indexOf(openInExternalWindow) !== -1) {
         const realVideoURL = videoUrl.replace("#[=]openInExternalWindow", "");
         window.open(realVideoURL,'_blank');
       }
@@ -425,10 +425,10 @@ class VideoPlayer extends Component {
     const isIframeClass = isVideo ? "" : styles.websiteIframeWrapper;
     let externalWebsite = null;
 
-    if(videoUrl !== "") {
+    if(videoUrl !== "" && videoUrl.indexOf) {
       const openInExternalWindowString = "#[=]openInExternalWindow";
       const openInExternalWindow = (videoUrl.indexOf(openInExternalWindowString) !== -1);
-      
+
       if(!isVideo && openInExternalWindow) {
         const realVideoUrl = videoUrl.replace("#[=]openInExternalWindow", "");
         externalWebsite = (
@@ -441,7 +441,11 @@ class VideoPlayer extends Component {
       } else if (!isVideo && !openInExternalWindow) {
         externalWebsite = (
           <div className={styles.websiteIframeContainer}>
-            <iframe className={styles.websiteIframe} src={videoUrl} />
+            <iframe 
+              className={styles.websiteIframe} 
+              src={videoUrl}
+              sandbox={"allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-presentation"}
+            />
           </div>
         );
       }
