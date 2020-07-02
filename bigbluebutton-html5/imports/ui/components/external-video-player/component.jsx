@@ -444,7 +444,7 @@ class VideoPlayer extends Component {
             <iframe 
               className={styles.websiteIframe} 
               src={videoUrl}
-              sandbox={"allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-presentation"}
+              sandbox={"allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-presentation allow-same-origin"}
             />
           </div>
         );
