@@ -1,0 +1,1 @@
+BBB_SERVER="bbb.bina.bigbluemeeting.com"  bash deployNewConfig.sh
