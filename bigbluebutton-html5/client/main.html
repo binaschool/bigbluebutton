@@ -64,7 +64,7 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
     document.addEventListener('gesturestart', function (e) {
       e.preventDefault();
     });
-    window.addEventListener('onload', function() {
+    document.addEventListener('DOMContentLoaded', (event) => {
       Sentry.init({ dsn: 'https://7721ea286cc44449849708fad5bfabe2@o424324.ingest.sentry.io/5355964' });
     });
   </script>
